@@ -1,5 +1,7 @@
 package pro.sky.java.course1.ObjectsAndClasses;
 
+import java.util.Objects;
+
 public class Autor {
     private String Name;
     private String Surname;
@@ -21,14 +23,17 @@ public class Autor {
         return "Имя автора: " + this.Name + ", Фамилия автора: " + this.Surname;
     }
 
-      public boolean equals(Autor newAutor) {
-        if (this.Name.equals(newAutor.Name) && this.Surname.equals(newAutor.Surname)) {
-            return true;
-        }
-        return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Autor autor = (Autor) o;
+        return Objects.equals(Name, autor.Name) && Objects.equals(Surname, autor.Surname);
     }
     @Override
     public int hashCode() {
         return java.util.Objects.hash(Name,Surname);
     }
-}
+
+    }
+

@@ -1,5 +1,7 @@
 package pro.sky.java.course1.ObjectsAndClasses;
 
+import java.util.Objects;
+
 public class Book {
     private String TitleBook;
     private String Autor;
@@ -25,15 +27,17 @@ public String getTitleBook(){
     public String toString() {
         return "Наименование книги: " + this.TitleBook + ", Автор: " + this.Autor + ", Год издания: " + this.YearPublication;
     }
-    public boolean equals(Book newBook) {
-        if (this.TitleBook.equals(newBook.TitleBook) && this.Autor.equals(newBook.Autor) && this.YearPublication == newBook.YearPublication) {
 
-                    return true;
-        }else
-        {return false;}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return YearPublication == book.YearPublication && Objects.equals(TitleBook, book.TitleBook) && Objects.equals(Autor, book.Autor);
     }
+
+    @Override
     public int hashCode() {
-        return java.util.Objects.hash(TitleBook, Autor, YearPublication);
+        return Objects.hash(TitleBook, Autor, YearPublication);
     }
-
 }
